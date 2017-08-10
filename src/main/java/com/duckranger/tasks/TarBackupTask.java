@@ -1,4 +1,4 @@
-package com.duckranger.updates;
+package com.duckranger.tasks;
 
 import java.io.File;
 import java.nio.file.DirectoryStream;
@@ -39,7 +39,7 @@ public class TarBackupTask extends Task {
 	public void run() {
 		verifyDirectory(source);
 		verifyDirectory(target);
-		execute("tar " + tarCommandModifiers + " " + target + "/"+fileName+"_"+updateNumber +".tar.gz "+
+		execute("tar " , tarCommandModifiers + " " + target + "/"+fileName+"_"+updateNumber +".tar.gz "+
 				source + "/" + fileMask);
 	}
 	
@@ -92,12 +92,12 @@ public class TarBackupTask extends Task {
 	public void reverse() {
 		info("--------------------------------------------------------------------------------");
 		info("recovering "+description);
+		ProcessBuilder builder = new ProcessBuilder();
+		builder.redirectErrorStream(true);
+		builder.redirectOutput(logFile);
 		try {
-			ProcessBuilder builder = new ProcessBuilder("rm -rf "+source +"/" + fileMask);
-			builder.redirectErrorStream(true);
-			builder.redirectOutput(logFile);
-			Process p = builder.start();
-			int error = p.waitFor();
+			builder.command("rm","-rf "+source +"/" + fileMask);
+			int error = builder.start().waitFor();
 			if (error !=0) {
 				error( "Failed to delete content of the original directory " + source +" with RC="+error);
 				markRollbackAsFailed();
@@ -110,11 +110,8 @@ public class TarBackupTask extends Task {
 		}
 		if (rollbackFailed()) return;
 		try {
-			ProcessBuilder builder = new ProcessBuilder("cp -f "+target+"/"+fileName+"_"+updateNumber+".tar.gz "+source);
-			builder.redirectErrorStream(true);
-			builder.redirectOutput(logFile);
-			Process p = builder.start();
-			int error = p.waitFor();
+			builder.command("cp","-f "+target+"/"+fileName+"_"+updateNumber+".tar.gz "+source);
+			int error = builder.start().waitFor();
 			if (error!=0) {
 				error( "Failed to copy tar backup file "+source+"/"+fileName+"_"+updateNumber+".tar.gz to "+source+" with RC="+error);
 				markRollbackAsFailed();
@@ -125,11 +122,8 @@ public class TarBackupTask extends Task {
 		}
 		if (rollbackFailed()) return;
 		try {
-			ProcessBuilder builder = new ProcessBuilder("tar xvfz "+source+"/"+fileName+"_"+updateNumber+".tar.gz");
-			builder.redirectErrorStream(true);
-			builder.redirectOutput(logFile);
-			Process p = builder.start();
-			int error = p.waitFor();
+			builder.command("tar","xvfz "+source+"/"+fileName+"_"+updateNumber+".tar.gz");
+			int error = builder.start().waitFor();
 			if (error!=0) {
 				error( "Failed to extract tar backup file "+source+"/"+fileName+"_"+updateNumber+".tar.gz with RC="+error);
 				markRollbackAsFailed();

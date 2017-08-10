@@ -1,7 +1,8 @@
-package com.duckranger.updates;
+package com.duckranger.tasks;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 public abstract class Task {
 
@@ -29,15 +30,15 @@ public abstract class Task {
 	 * @throws InterruptedException 
 	 * @throws IOException 
 	 */
-	void execute(String command) {
-		ProcessBuilder builder = new ProcessBuilder(command);
+	void execute(String... commandAndArgs) {
+		ProcessBuilder builder = new ProcessBuilder(commandAndArgs);
 		builder.redirectErrorStream(true);
 		builder.redirectOutput(logFile);
 		try {
 			Process process = builder.start();
 			int error = process.waitFor();
 			if (error!=0) 
-				throw new Exception("Command "+command+" returned RC="+error);
+				throw new Exception("Command "+Arrays.toString(commandAndArgs)+" returned RC="+error);
 			info(report()+ " successful");
 		} catch (Exception e) {
 			error(e.getMessage());
