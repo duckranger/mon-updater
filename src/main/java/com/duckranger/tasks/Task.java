@@ -8,6 +8,7 @@ public abstract class Task {
 
 	private boolean failed = false;
 	private boolean rollbackFailed = false;
+	protected String description;		//Used for logging success/failure reports and undo.
 	
 	File logFile;
 	

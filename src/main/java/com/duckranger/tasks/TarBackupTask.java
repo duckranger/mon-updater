@@ -19,7 +19,7 @@ import java.nio.file.Paths;
  */
 public class TarBackupTask extends Task {
 
-	private String description;		//Used for logging success/failure reports and undo.
+	
 	private String source;			//Source directory - all files in there will be tar'd and copied.
 	private String target; 			//Destination directory - the tar ball is going to be stored there.
 	
@@ -39,7 +39,7 @@ public class TarBackupTask extends Task {
 	public void run() {
 		verifyDirectory(source);
 		verifyDirectory(target);
-		execute("tar " , tarCommandModifiers + " " + target + "/"+fileName+"_"+updateNumber +".tar.gz "+
+		execute("tar" , tarCommandModifiers + " " + target + "/"+fileName+"_"+updateNumber +".tar.gz "+
 				source + "/" + fileMask);
 	}
 	
