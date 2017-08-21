@@ -8,10 +8,9 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MD5CheckerTask extends Task{
+public class MD5Checker extends Task<MD5Checker>{
 
 	private String md5FileName;
-	private String fileName;
 	
 	@Override
 	public void run() {
@@ -49,28 +48,19 @@ public class MD5CheckerTask extends Task{
 	 */
 	@Override
 	public void reverse() {
-		
+		//No OP
 	}
 
 	@Override
-	public String report() {
+	public String defaultReport() {
 	
 		return "MD5 checking task for " + description+" with file " + fileName;
 	}
 	
 
-	public MD5CheckerTask withMD5Filename(String md5FileName) {
+	public MD5Checker withMD5Filename(String md5FileName) {
 		this.md5FileName = md5FileName;
 		return this;
 	}
 	
-	public MD5CheckerTask withFilename(String fileName) {
-		this.fileName = fileName;
-		return this;
-	}
-	
-	public MD5CheckerTask withDescription(String description) {
-		this.description = description;
-		return this;
-	}
 }
