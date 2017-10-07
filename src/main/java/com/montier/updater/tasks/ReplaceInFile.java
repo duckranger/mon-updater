@@ -1,4 +1,4 @@
-package com.duckranger.tasks;
+package com.montier.updater.tasks;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +24,7 @@ public class ReplaceInFile extends Task<ReplaceInFile>{
 	}
 
 	@Override
-	public void reverse() {
+	public void rollback() {
 		String line;
 		try (BufferedReader input = new BufferedReader(new FileReader(new File(source+"/"+fileName)))) {
 		    while ((line = input.readLine()) != null) {

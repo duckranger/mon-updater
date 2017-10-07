@@ -1,17 +1,21 @@
-package com.duckranger.tasks;
+package com.montier.updater.tasks;
 
-public class ExtractTar extends Task<ExtractTar> {
+// A task to extract a single tar file
+public class ExtractTar extends TarTask {
 
+	public ExtractTar() {
+		this.tarCommandModifiers = "xvf";	
+	}
+	
 	@Override
 	public void run() {
 		verifyDirectory(source);
 		verifyDirectory(target);
-		execute("tar","xvf", source+"/"+fileName,target);
+		execute("tar",tarCommandModifiers, source+"/"+getFullFileName(),target);
 	}
 
 	@Override
-	public void reverse() {
-		// TODO Auto-generated method stub
+	public void rollback() {
 		
 	}
 

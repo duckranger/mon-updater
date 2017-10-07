@@ -1,4 +1,4 @@
-package com.duckranger.tasks;
+package com.montier.updater.tasks;
 
 public class CopySingleFile extends Task<CopySingleFile>{
 
@@ -10,7 +10,7 @@ public class CopySingleFile extends Task<CopySingleFile>{
 	}
 
 	@Override
-	public void reverse() {
+	public void rollback() {
 		execute("cp","-f", target+"/"+fileName,source);
 	}
 

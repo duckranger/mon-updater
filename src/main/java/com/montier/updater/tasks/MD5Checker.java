@@ -1,4 +1,4 @@
-package com.duckranger.tasks;
+package com.montier.updater.tasks;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +47,7 @@ public class MD5Checker extends Task<MD5Checker>{
 	 * There is nothing to do to reverse an MD5 Check
 	 */
 	@Override
-	public void reverse() {
+	public void rollback() {
 		//No OP
 	}
 

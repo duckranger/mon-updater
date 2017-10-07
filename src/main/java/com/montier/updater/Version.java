@@ -1,4 +1,4 @@
-package com.duckranger.updates;
+package com.montier.updater;
 
 import java.io.Serializable;
 import java.util.Arrays;

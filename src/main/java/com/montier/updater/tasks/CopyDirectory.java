@@ -1,4 +1,4 @@
-package com.duckranger.tasks;
+package com.montier.updater.tasks;
 
 import java.nio.file.attribute.PosixFilePermissions;
 
@@ -22,7 +22,7 @@ public class CopyDirectory extends Task<CopyDirectory> {
 	}
 
 	@Override
-	public void reverse() {
+	public void rollback() {
 		execute("cp","-r", target,source);
 	}
 

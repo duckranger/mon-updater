@@ -1,4 +1,4 @@
-package com.duckranger.tasks;
+package com.montier.updater.tasks;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,7 +37,7 @@ public class RemoveLinesFromFile extends Task<RemoveLinesFromFile>{
 		} catch (IOException e) {
 			markAsFailed();
 		}
-		if (!failed()) {
+		if (!isFailed()) {
 			try (PrintWriter writer = new PrintWriter(source+"/"+fileName)) {
 				writer.print(newFile.toString());
 			} catch (FileNotFoundException e) {
@@ -48,7 +48,7 @@ public class RemoveLinesFromFile extends Task<RemoveLinesFromFile>{
 	}
 
 	@Override
-	public void reverse() {
+	public void rollback() {
 		String line;
 		StringBuffer newFile = new StringBuffer();
 		try (BufferedReader input = new BufferedReader(new FileReader(new File(source+"/"+fileName)))) {
@@ -64,7 +64,7 @@ public class RemoveLinesFromFile extends Task<RemoveLinesFromFile>{
 		} catch (IOException e) {
 			markRollbackAsFailed();
 		}
-		if (!rollbackFailed()) {
+		if (!isRollbackFailed()) {
 			try (PrintWriter writer = new PrintWriter(source+"/"+fileName)) {
 				writer.print(newFile.toString());
 			} catch (FileNotFoundException e) {

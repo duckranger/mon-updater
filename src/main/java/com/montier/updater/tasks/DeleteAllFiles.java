@@ -1,4 +1,4 @@
-package com.duckranger.tasks;
+package com.montier.updater.tasks;
 
 public class DeleteAllFiles extends Task<DeleteAllFiles>{
 
@@ -10,7 +10,7 @@ public class DeleteAllFiles extends Task<DeleteAllFiles>{
 	}
 
 	@Override
-	public void reverse() {
+	public void rollback() {
 		//There is no going back on rm -rf
 	}
 
