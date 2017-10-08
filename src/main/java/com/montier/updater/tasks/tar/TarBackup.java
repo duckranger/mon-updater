@@ -1,4 +1,4 @@
-package com.montier.updater.tasks;
+package com.montier.updater.tasks.tar;
 
 
 /**
@@ -56,7 +56,7 @@ public class TarBackup extends TarTask {
 		// Delete the files in the directory. if the file mask is empty (which works well for tar, but not
 		// for rm) then make it a '*'.
 		try {
-			builder.command("rm","-rf",source +"/" + fileMask==""?"*":fileMask);
+			builder.command("rm","-rf",source +"/" + cpFileMask());
 			int error = builder.start().waitFor();
 			if (error !=0) {
 				error( "Failed to delete content of the original directory " + source +" with RC="+error);

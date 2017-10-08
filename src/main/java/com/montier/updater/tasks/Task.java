@@ -46,12 +46,12 @@ public abstract class Task<T> {
 	protected File logFile;
 	
 	// Write info message to logger
-	void info(String message) {
+	protected void info(String message) {
 		log.log(Level.INFO,message);
 	}
 	
 	// Write error message to logger
-	void error(String message) {
+	protected void error(String message) {
 		log.log(Level.SEVERE,message);
 	}
 	
@@ -133,7 +133,7 @@ public abstract class Task<T> {
 	// If the execution throws an exception (or ends with RC!=0) - the task will be
 	// marked as failed. This can be used to stop the chain of tasks from processing
 	// and start rollback.
-	void execute(String... commandAndArgs) {
+	protected void execute(String... commandAndArgs) {
 		ProcessBuilder builder = new ProcessBuilder(commandAndArgs);
 		builder.redirectErrorStream(true);
 		builder.redirectOutput(logFile);
@@ -151,13 +151,13 @@ public abstract class Task<T> {
 	}
 	
 	// Mark this task as failed
-	void markAsFailed() {
+	protected void markAsFailed() {
 		this.failed = true;
 	}
 	
 	// Mark the rollback of this task as failed. This can be used
 	// to stop the rollback process in cases where there is a severe error
-	void markRollbackAsFailed() {
+	protected void markRollbackAsFailed() {
 		this.rollbackFailed = true;
 	}
 	

@@ -6,9 +6,9 @@ import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.montier.updater.tasks.ExtractTar;
 import com.montier.updater.tasks.Task;
 import com.montier.updater.tasks.TaskFactory;
+import com.montier.updater.tasks.tar.TarExtract;
 
 /**
  * This class uses the tasks mechanism to create an update script.
